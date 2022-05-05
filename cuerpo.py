@@ -5,10 +5,12 @@ Crear un sudoku 9x9 con las siguientes reglas
 2. validar filas (hecho)
 3. validar columnas (hecho)
 4. validar segmentos de 3x3 (hecho)
-5. añadir mapa con numeros aleatorios
+5. añadir mapa con numeros aleatorios (hecho)
+5.1 Mostrar texto de ganar o de perder
 6. integrar modo grafico
 
 """
+import random
 class Cuerpo():
     def __init__(self):
         self.tablero = []
@@ -16,12 +18,12 @@ class Cuerpo():
 
 
     def creartablero(self):
-        self.tablero = [[4,1,0,0,2,0,0,0,0],
-                        [4,0,0,2,0,0,0,0,0],
-                        [2,7,0,0,0,3,3,0,0],
-                        [0,0,0,0,0,3,3,0,0],
-                        [5,0,0,8,0,0,0,0,0],
-                        [0,8,0,0,0,0,0,1,0],
+        self.tablero = [[0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0],]
@@ -79,10 +81,36 @@ class Cuerpo():
                         print("valido ", self.listaexclusiva)
                     else: 
                         print("invalido ",self.listaexclusiva)
+
+    def numerosrandom(self):
+        return random.randrange(1,10)
+
+    def posiciondenumeros(self):
+        numero = self.numerosrandom()
+        self.tablero[1][1] = numero
+        numero = self.numerosrandom()
+        self.tablero[4][2] = numero
+        numero = self.numerosrandom()
+        self.tablero[8][0] = numero
+        numero = self.numerosrandom()
+        self.tablero[2][4] = numero
+        numero = self.numerosrandom()
+        self.tablero[3][5] = numero
+        numero = self.numerosrandom()
+        self.tablero[7][4] = numero
+        numero = self.numerosrandom()
+        self.tablero[0][6] = numero
+        numero = self.numerosrandom()
+        self.tablero[5][8] = numero
+        numero = self.numerosrandom()
+        self.tablero[6][7] = numero
+        
+
         
 
 s_cuerpo = Cuerpo()
 s_cuerpo.creartablero()
+s_cuerpo.posiciondenumeros()
 s_cuerpo.imprimirtablero()
 print("\nverificar filas\n")
 s_cuerpo.pruebadeverificacion()
