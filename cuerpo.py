@@ -11,6 +11,7 @@ Crear un sudoku 9x9 con las siguientes reglas
 
 """
 import random
+interruptor = 0
 class Cuerpo():
     def __init__(self):
         self.tablero = []
@@ -39,6 +40,7 @@ class Cuerpo():
                 print("Valido ",filas)
             else:
                 print("invalido ", filas)
+                return False
         
 
     def validarfilas(self,unicafila):
@@ -58,8 +60,9 @@ class Cuerpo():
                 print("valido",self.listaexclusiva)
                 self.listaexclusiva.clear()
             else:
-                print("ivalido",self.listaexclusiva)
+                print("invalido",self.listaexclusiva)
                 self.listaexclusiva.clear()
+                return False
 
     def validartodossegmentos(self):
         self.validarsegmentos3x3(0,3)
@@ -81,6 +84,9 @@ class Cuerpo():
                         print("valido ", self.listaexclusiva)
                     else: 
                         print("invalido ",self.listaexclusiva)
+                        return False
+                        
+                        
 
     def numerosrandom(self):
         return random.randrange(1,10)
@@ -97,14 +103,20 @@ class Cuerpo():
         numero = self.numerosrandom()
         self.tablero[3][5] = numero
         numero = self.numerosrandom()
-        self.tablero[7][4] = numero
+        self.tablero[7][3] = numero
         numero = self.numerosrandom()
         self.tablero[0][6] = numero
         numero = self.numerosrandom()
         self.tablero[5][8] = numero
         numero = self.numerosrandom()
         self.tablero[6][7] = numero
-        
+
+    def mensajefinal(self):
+        for filas in self.tablero:
+            for elemento in filas:
+                if elemento == 0:
+                    return True
+        return False
 
         
 
@@ -113,8 +125,30 @@ s_cuerpo.creartablero()
 s_cuerpo.posiciondenumeros()
 s_cuerpo.imprimirtablero()
 print("\nverificar filas\n")
-s_cuerpo.pruebadeverificacion()
+
+val1 = s_cuerpo.pruebadeverificacion()
+if val1 == False:
+    interruptor=1
+
 print("\nverificar columnas\n")
-s_cuerpo.validarcolumnas()
+
+val2 = s_cuerpo.validarcolumnas()
+if val2 == False:
+    interruptor=1
+
 print("\nverificar segmentos\n")
-s_cuerpo.validartodossegmentos()
+
+val3 = s_cuerpo.validartodossegmentos()
+if val3 == False:
+    interruptor=1
+
+val = s_cuerpo.mensajefinal()
+if val == True:
+    print("Le faltan numeros")
+elif interruptor == 1:
+    print("SOLUCION NO VALIDA")
+else:
+    print("GANASTE")
+
+print(interruptor)
+
